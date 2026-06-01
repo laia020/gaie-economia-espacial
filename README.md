@@ -352,3 +352,24 @@ Ryan Perez Pacheco - RM 98782
 ## Licenca
 
 Este projeto foi desenvolvido para fins academicos.
+
+## Resumo executivo complementar
+
+Este projeto simula um cenario de manutencao preditiva para satelites. A solucao gera um dataset sintetico de telemetria espacial, treina e compara tres modelos de classificacao, escolhe o melhor modelo por F1-score, explica as previsoes com SHAP e publica uma interface interativa em Streamlit.
+
+- Problema: prever risco de falha em componentes de satelites.
+- Dados: dataset sintetico reproduzivel com 1000 linhas, 10 variaveis preditoras e 1 alvo binario.
+- Modelos comparados: Logistic Regression, Random Forest e Gradient Boosting.
+- Melhor modelo atual: Logistic Regression, com F1-score de 0.510 no teste.
+- Aplicacao publicada: https://gaie-economia-espacial-hmh597lhuamwgbmtqwza9j.streamlit.app/
+
+## Como o dataset foi montado
+
+O dataset foi montado de forma sintetica para simular telemetria de um satelite em operacao.
+O script generate_dataset.py usa uma seed fixa, RANDOM_SEED = 42, para que qualquer pessoa consiga gerar novamente o mesmo conjunto de dados.
+
+As variaveis simulam leituras esperadas de uma missao espacial, como temperatura, tensao da bateria, orientacao, radiacao, fluxo solar, taxa de dados, combustivel e idade operacional.
+A variavel alvo component_failure nao foi sorteada de forma totalmente aleatoria.
+Primeiro, o script calcula fatores de risco como estresse termico, baixa tensao, baixo combustivel, magnitude da orientacao e exposicao a radiacao ao longo do tempo.
+Depois, esses fatores entram em uma funcao logistica que gera a probabilidade de falha; a classe final e sorteada com base nessa probabilidade.
+
