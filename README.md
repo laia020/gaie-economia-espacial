@@ -1,101 +1,88 @@
-# GAIE — Inteligência Artificial aplicada à Economia Espacial
+# GAIE - Inteligencia Artificial aplicada a Economia Espacial
 
-Projeto desenvolvido para a disciplina **Generative AI For Engineering (GAIE)**, como parte da **Global Solution FIAP — Space Connect**.
+Projeto desenvolvido para a disciplina **Generative AI For Engineering (GAIE)**, como parte da **Global Solution FIAP - Space Connect**.
 
-A proposta do projeto é construir um pipeline completo de **Inteligência Artificial e Machine Learning** aplicado a um problema real relacionado à **Economia Espacial**.
+A proposta e construir um pipeline completo de **Inteligencia Artificial e Machine Learning** aplicado a um problema de **Economia Espacial**: prever falhas em componentes de satelites a partir de dados de telemetria.
 
----
+## Aplicacao em funcionamento
 
-## Aplicação em funcionamento
-
-A aplicação foi publicada utilizando **Streamlit Community Cloud** e pode ser acessada pelo link abaixo:
+A aplicacao foi publicada com **Streamlit Community Cloud**:
 
 https://gaie-economia-espacial-hmh597lhuamwgbmtqwza9j.streamlit.app/
 
----
-
-## Repositório do projeto
+## Repositorio do projeto
 
 https://github.com/laia020/gaie-economia-espacial
 
----
-
 ## Contexto do problema
 
-A nova corrida espacial não depende apenas de foguetes, satélites e estações orbitais. Ela depende cada vez mais de **software, dados, automação e inteligência artificial**.
+A nova corrida espacial depende cada vez mais de software, dados, automacao e inteligencia artificial. Satelites modernos operam em ambientes extremos, sujeitos a variacoes de temperatura, radiacao cosmica, limitacoes de energia, degradacao de componentes e consumo de combustivel.
 
-Satélites modernos operam em ambientes extremos, sujeitos a variações de temperatura, radiação cósmica, falhas de energia, perda de comunicação, degradação de componentes e limitações de combustível. Uma falha em um componente crítico pode comprometer a missão, gerar prejuízos financeiros e afetar serviços essenciais na Terra, como telecomunicações, monitoramento climático, navegação, agricultura de precisão e resposta a desastres.
+Uma falha em um componente critico pode comprometer a missao, gerar prejuizos financeiros e afetar servicos essenciais na Terra, como telecomunicacoes, monitoramento ambiental, navegacao, agricultura de precisao e resposta a desastres.
 
-Diante desse cenário, este projeto propõe uma solução de IA para **prever falhas em componentes de satélites** a partir de dados simulados de telemetria.
+Este projeto propoe uma solucao de IA para estimar a probabilidade de falha de componentes de satelites com base em leituras simuladas de telemetria.
 
----
+## Objetivo
 
-## Objetivo do projeto
+Desenvolver, treinar, comparar, interpretar e publicar uma solucao de Machine Learning capaz de prever se um componente de satelite apresenta risco de falha.
 
-O objetivo é desenvolver um pipeline completo de Machine Learning capaz de prever se um componente de satélite apresenta risco de falha, com base em variáveis operacionais e ambientais.
+A solucao contempla:
 
-A solução contempla:
-
-- Geração de dados sintéticos com mais de 1.000 registros.
-- Pré-processamento dos dados.
-- Treinamento de modelos preditivos.
-- Comparação de desempenho entre modelos.
-- Escolha do melhor modelo.
-- Interpretação das previsões com SHAP.
-- Deploy da solução em uma aplicação web com Streamlit.
-- Documentação completa para reprodução do projeto.
-
----
+- Geracao de dataset sintetico reproduzivel.
+- Pre-processamento e engenharia de atributos.
+- Treinamento e comparacao de modelos preditivos.
+- Escolha do melhor modelo com base em F1-score.
+- Interpretabilidade com SHAP.
+- Deploy em aplicacao web com Streamlit.
+- Documentacao e instrucoes de reproducao.
 
 ## Problema de Machine Learning
 
-Este projeto trata um problema de **classificação binária**.
+O projeto trata um problema de **classificacao binaria**.
 
-A variável alvo é:
-
-| Variável | Descrição |
+| Variavel alvo | Descricao |
 |---|---|
-| `component_failure` | Indica se houve falha no componente do satélite. `0 = sem falha`, `1 = falha` |
+| `component_failure` | Indica falha do componente. `0 = sem falha`, `1 = falha`. |
 
-O modelo recebe dados de telemetria como entrada e retorna a probabilidade de falha.
+O modelo recebe variaveis de telemetria e retorna a probabilidade de falha.
 
----
+## Fonte e geracao dos dados
 
-## Fonte dos dados
+O dataset e sintetico e reproduzivel. Ele e gerado pelo script:
 
-Foi utilizado um **dataset sintético gerado por IA**, seguindo a exigência da entrega de conter no mínimo:
+```txt
+generate_dataset.py
+```
 
-- 1.000 linhas.
-- 10 colunas.
-- Variáveis relacionadas ao problema escolhido.
-
-O dataset simula dados de telemetria de satélites, considerando características comuns em ambientes orbitais.
-
-Arquivo utilizado:
+O arquivo gerado e:
 
 ```txt
 satellite_failure_dataset.csv
 ```
 
----
+Caracteristicas do dataset:
 
-## Dicionário de dados
+- 1000 linhas.
+- 10 variaveis preditoras.
+- 1 variavel alvo.
+- 0 valores ausentes.
+- Distribuicao atual do alvo: 641 registros sem falha e 359 registros com falha.
 
-| Coluna | Descrição |
+## Dicionario de dados
+
+| Coluna | Descricao |
 |---|---|
 | `temperature_c` | Temperatura do componente em graus Celsius. |
-| `battery_voltage` | Tensão da bateria do satélite. |
-| `orientation_x` | Eixo X da orientação do satélite. |
-| `orientation_y` | Eixo Y da orientação do satélite. |
-| `orientation_z` | Eixo Z da orientação do satélite. |
-| `cosmic_radiation` | Nível de radiação cósmica recebido. |
+| `battery_voltage` | Tensao da bateria do satelite. |
+| `orientation_x` | Eixo X da orientacao do satelite. |
+| `orientation_y` | Eixo Y da orientacao do satelite. |
+| `orientation_z` | Eixo Z da orientacao do satelite. |
+| `cosmic_radiation` | Nivel de radiacao cosmica recebido. |
 | `solar_flux` | Intensidade do fluxo solar. |
-| `data_rate_mbps` | Taxa de transmissão de dados em Mbps. |
-| `thruster_fuel_kg` | Quantidade de combustível restante nos propulsores. |
-| `age_years` | Idade operacional do satélite em anos. |
-| `component_failure` | Variável alvo: indica se houve falha no componente. |
-
----
+| `data_rate_mbps` | Taxa de transmissao de dados em Mbps. |
+| `thruster_fuel_kg` | Quantidade de combustivel restante nos propulsores. |
+| `age_years` | Idade operacional do satelite em anos. |
+| `component_failure` | Variavel alvo: indica se houve falha no componente. |
 
 ## Tecnologias utilizadas
 
@@ -108,137 +95,143 @@ satellite_failure_dataset.csv
 - Joblib
 - GitHub
 
----
-
 ## Estrutura do projeto
 
 ```txt
 gaie-economia-espacial/
-│
-├── app.py
-├── train_save_model.py
-├── satellite_failure_dataset.csv
-├── logistic_model.pkl
-├── model_report.md
-├── requirements.txt
-└── README.md
+|-- app.py
+|-- best_model.pkl
+|-- feature_engineering.py
+|-- generate_dataset.py
+|-- logistic_model.pkl
+|-- model_metadata.json
+|-- model_metrics.csv
+|-- model_report.md
+|-- requirements.txt
+|-- satellite_failure_dataset.csv
+|-- shap_summary.csv
+|-- train_save_model.py
+|-- docs/
+|   |-- advanced-ml-improvements.md
+|   `-- project-deliverables.md
+`-- README.md
 ```
-
----
 
 ## Pipeline de Machine Learning
 
-O pipeline desenvolvido contempla as seguintes etapas:
+### 1. Geracao dos dados
 
-### 1. Geração dos dados
+O script `generate_dataset.py` cria dados sinteticos com seed fixa. As variaveis simulam condicoes de operacao de satelites, como temperatura, radiacao, tensao da bateria, combustivel, fluxo solar, taxa de dados e idade.
 
-Foi criado um dataset sintético simulando dados de telemetria de satélites.
+A variavel `component_failure` e calculada a partir de uma funcao logistica que combina fatores de risco.
 
-As variáveis foram definidas com base em fatores que podem influenciar falhas em componentes espaciais, como temperatura, radiação, energia, idade do satélite e combustível restante.
+### 2. Engenharia de atributos
 
----
+O arquivo `feature_engineering.py` adiciona variaveis derivadas ao pipeline:
 
-### 2. Pré-processamento
+| Feature criada | Ideia |
+|---|---|
+| `thermal_stress` | Distancia da temperatura nominal de 25 C. |
+| `low_voltage_risk` | Risco por tensao abaixo de 12 V. |
+| `fuel_reserve_risk` | Risco por combustivel abaixo de 500 kg. |
+| `radiation_age_interaction` | Exposicao acumulada aproximada por radiacao vezes idade. |
+| `orientation_magnitude` | Magnitude do vetor de orientacao. |
 
-As variáveis numéricas foram padronizadas utilizando `StandardScaler`, garantindo que os modelos trabalhassem com dados em uma escala adequada.
+### 3. Pre-processamento
 
-Também foi feita a separação entre:
+O pipeline usa:
 
-- Variáveis preditoras.
-- Variável alvo.
-- Base de treino.
-- Base de teste.
+- `SatelliteFeatureEngineer` para engenharia de atributos.
+- `StandardScaler` para padronizacao numerica.
+- Classificador supervisionado.
 
----
+Os dados sao separados em treino e teste com estratificacao, preservando a proporcao entre classes.
 
-### 3. Modelos testados
+### 4. Modelos testados
 
-Foram aplicados dois modelos de classificação:
+Foram comparados tres modelos:
 
-#### Regressão Logística
+- Logistic Regression
+- Random Forest Classifier
+- Gradient Boosting Classifier
 
-Modelo linear utilizado como baseline para classificação binária.
+O treinamento e a comparacao ficam em `train_save_model.py`.
 
-#### Random Forest Classifier
+### 5. Validacao dos modelos
 
-Modelo baseado em árvores de decisão, utilizado para capturar relações não lineares entre as variáveis.
+Foram usadas as metricas:
 
----
+- Accuracy
+- Precision
+- Recall
+- F1-score
+- ROC-AUC
+- Matriz de confusao
 
-### 4. Validação dos modelos
-
-Os modelos foram avaliados utilizando as seguintes métricas:
-
-- Accuracy.
-- Precision.
-- Recall.
-- F1-score.
-
----
+Tambem foi aplicada validacao cruzada estratificada com 5 folds no conjunto de treino.
 
 ## Resultados obtidos
 
-| Modelo | Accuracy | Precision | Recall | F1-score |
-|---|---:|---:|---:|---:|
-| Logistic Regression | 0.645 | 0.485 | 0.229 | 0.311 |
-| Random Forest | 0.645 | 0.478 | 0.157 | 0.237 |
+Resultados atuais do arquivo `model_metrics.csv`:
 
-Com base no F1-score, o modelo escolhido foi:
+| Modelo | Accuracy | Precision | Recall | F1-score | ROC-AUC |
+|---|---:|---:|---:|---:|---:|
+| Logistic Regression | 0.635 | 0.494 | 0.528 | 0.510 | 0.639 |
+| Random Forest | 0.595 | 0.418 | 0.319 | 0.362 | 0.607 |
+| Gradient Boosting | 0.580 | 0.333 | 0.167 | 0.222 | 0.555 |
+
+O melhor modelo foi:
 
 ```txt
 Logistic Regression
 ```
 
-A Regressão Logística apresentou melhor equilíbrio entre precisão e recall neste conjunto de dados.
+Ele foi escolhido pelo maior F1-score no conjunto de teste. O F1-score foi usado como metrica principal porque a classe positiva representa falha do componente e e menos frequente que a classe normal.
 
----
+O modelo final esta salvo em:
+
+```txt
+best_model.pkl
+```
 
 ## Interpretabilidade com SHAP
 
-Para interpretar o comportamento do modelo, foi utilizada a biblioteca **SHAP**.
+O projeto usa SHAP para explicar as previsoes do modelo escolhido.
 
-O SHAP permite identificar quais variáveis mais influenciaram as previsões do modelo, aumentando a transparência da solução.
+- `shap_summary.csv` contem a importancia global das variaveis.
+- `model_report.md` documenta a interpretacao global.
+- `app.py` calcula SHAP local para a previsao feita pelo usuario.
 
-As variáveis com maior influência foram:
+Principais variaveis na ultima execucao:
 
-| Variável | Influência média SHAP |
+| Feature | Mean absolute SHAP |
 |---|---:|
-| `thruster_fuel_kg` | 9.927876 |
-| `cosmic_radiation` | 5.191791 |
-| `data_rate_mbps` | 1.354582 |
-| `temperature_c` | 0.825029 |
-| `age_years` | 0.807272 |
-| `solar_flux` | 0.600227 |
-| `battery_voltage` | 0.175467 |
-| `orientation_y` | 0.081065 |
-| `orientation_z` | 0.045517 |
-| `orientation_x` | 0.035726 |
+| `age_years` | 0.5478 |
+| `cosmic_radiation` | 0.5048 |
+| `low_voltage_risk` | 0.4266 |
+| `radiation_age_interaction` | 0.3136 |
+| `thermal_stress` | 0.2178 |
 
-A análise mostra que fatores como combustível restante, radiação cósmica, taxa de transmissão, temperatura e idade do satélite possuem forte impacto na previsão de falha.
+A interpretacao indica que idade do satelite, radiacao cosmica, risco de baixa tensao e exposicao acumulada estao entre os fatores mais relevantes para a previsao de falha.
 
----
+## Aplicacao web
 
-## Aplicação web
+A aplicacao foi desenvolvida com **Streamlit** em `app.py`.
 
-A aplicação foi desenvolvida com **Streamlit**.
-
-Ela permite que o usuário informe valores de telemetria e receba:
+Ela permite que o usuario informe valores de telemetria e receba:
 
 - Probabilidade de falha do componente.
-- Classificação final: falha ou sem falha.
-- Explicação da decisão do modelo com SHAP.
+- Classificacao final: falha ou sem falha.
+- Explicacao local da decisao com SHAP.
+- Tabela de metricas dos modelos.
 
-Arquivo principal da aplicação:
+Link da aplicacao publicada:
 
-```txt
-app.py
-```
+https://gaie-economia-espacial-hmh597lhuamwgbmtqwza9j.streamlit.app/
 
----
+## Como executar localmente
 
-## Como executar o projeto localmente
-
-### 1. Clonar o repositório
+### 1. Clonar o repositorio
 
 ```bash
 git clone https://github.com/laia020/gaie-economia-espacial.git
@@ -261,120 +254,101 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 
-### 3. Instalar dependências
+### 3. Instalar dependencias
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Executar a aplicação
+### 4. Gerar o dataset
 
 ```bash
-streamlit run app.py
+python generate_dataset.py
 ```
 
-Depois disso, a aplicação será aberta no navegador.
-
----
-
-## Como treinar o modelo novamente
-
-Caso deseje treinar o modelo novamente, execute:
+### 5. Treinar e comparar os modelos
 
 ```bash
 python train_save_model.py
 ```
 
-Esse script irá:
+Esse comando gera ou atualiza:
 
-1. Carregar o dataset.
-2. Separar treino e teste.
-3. Aplicar o pipeline de pré-processamento.
-4. Treinar o modelo.
-5. Salvar o modelo treinado em:
+- `best_model.pkl`
+- `logistic_model.pkl`
+- `model_metrics.csv`
+- `model_report.md`
+- `model_metadata.json`
+- `shap_summary.csv`
 
-```txt
-logistic_model.pkl
+### 6. Executar a aplicacao
+
+```bash
+streamlit run app.py
 ```
 
----
+Depois disso, acesse:
+
+```txt
+http://localhost:8501
+```
 
 ## Deploy
 
-O deploy foi realizado utilizando **Streamlit Community Cloud**.
+O deploy foi realizado no **Streamlit Community Cloud**.
 
-Link da aplicação:
+Link da aplicacao:
 
 https://gaie-economia-espacial-hmh597lhuamwgbmtqwza9j.streamlit.app/
 
----
+## Criterios da entrega atendidos
 
-## Critérios da entrega atendidos
+| Criterio | Onde aparece | Status |
+|---|---|---|
+| Problema relacionado a Economia Espacial | README e `model_report.md` | Concluido |
+| Dataset com no minimo 1000 linhas | `generate_dataset.py` e `satellite_failure_dataset.csv` | Concluido |
+| Dataset com no minimo 10 colunas | `satellite_failure_dataset.csv` | Concluido |
+| Fonte ou geracao dos dados | `generate_dataset.py` | Concluido |
+| Pelo menos duas tecnicas de ML | `train_save_model.py` | Concluido |
+| Pipeline com pre-processamento | `train_save_model.py` | Concluido |
+| Engenharia de atributos | `feature_engineering.py` | Concluido |
+| Treinamento dos modelos | `train_save_model.py` | Concluido |
+| Validacao e comparacao de desempenho | `model_metrics.csv` e `model_report.md` | Concluido |
+| Escolha do melhor modelo | `best_model.pkl` e `model_metadata.json` | Concluido |
+| Interpretabilidade com SHAP | `shap_summary.csv`, `model_report.md` e `app.py` | Concluido |
+| Deploy da aplicacao | Streamlit Community Cloud | Concluido |
+| Codigo disponivel no GitHub | Repositorio publicado | Concluido |
+| README detalhado | `README.md` | Concluido |
 
-| Critério | Status |
-|---|---|
-| Definição de problema relacionado à Economia Espacial | Concluído |
-| Dataset com no mínimo 1.000 linhas | Concluído |
-| Dataset com no mínimo 10 colunas | Concluído |
-| Desenvolvimento de modelos preditivos | Concluído |
-| Aplicação de pelo menos duas técnicas de ML | Concluído |
-| Pipeline com pré-processamento | Concluído |
-| Treinamento dos modelos | Concluído |
-| Validação e comparação de desempenho | Concluído |
-| Escolha do melhor modelo | Concluído |
-| Interpretabilidade com SHAP | Concluído |
-| Deploy da aplicação | Concluído |
-| README detalhado | Concluído |
-| Código disponível no GitHub | Concluído |
+## Conexao com a Economia Espacial
 
----
+A solucao se conecta diretamente a Economia Espacial porque atua em um problema critico de operacao de satelites: a previsao de falhas em componentes.
 
-## Conexão com a Economia Espacial
+Satelites sao ativos essenciais para telecomunicacoes, navegacao, monitoramento ambiental, agricultura de precisao, defesa, meteorologia, observacao da Terra e internet via satelite. Prever falhas pode reduzir custos, aumentar a vida util de missoes e melhorar a confiabilidade de servicos baseados em infraestrutura espacial.
 
-A solução se conecta diretamente à Economia Espacial por atuar sobre um problema crítico de operação de satélites: a previsão de falhas em componentes.
-
-Satélites são ativos essenciais para diversos setores econômicos, como:
-
-- Telecomunicações.
-- Agricultura de precisão.
-- Monitoramento ambiental.
-- Defesa.
-- Navegação.
-- Clima e meteorologia.
-- Internet via satélite.
-- Observação da Terra.
-
-A capacidade de prever falhas permite reduzir custos, aumentar a vida útil de missões e melhorar a confiabilidade de serviços baseados em infraestrutura espacial.
-
----
-
-## Possíveis melhorias futuras
+## Possiveis melhorias futuras
 
 - Utilizar dados reais de telemetria espacial.
-- Integrar APIs públicas da NASA, ESA, INPE ou Copernicus.
-- Testar modelos mais avançados, como XGBoost, LightGBM e redes neurais.
-- Criar um sistema de alerta em tempo real.
-- Armazenar previsões em banco de dados.
-- Adicionar autenticação de usuários.
-- Criar dashboard com histórico de falhas.
-- Melhorar o balanceamento das classes do dataset.
-- Aplicar técnicas de detecção de anomalias.
-
----
+- Integrar APIs publicas da NASA, ESA, INPE ou Copernicus.
+- Testar modelos mais avancados, como XGBoost, LightGBM e redes neurais.
+- Calibrar probabilidades e ajustar threshold para reduzir falsos negativos.
+- Criar sistema de alerta em tempo real.
+- Armazenar previsoes em banco de dados.
+- Criar dashboard com historico de falhas.
+- Aplicar tecnicas de deteccao de anomalias.
 
 ## Autores
 
-Projeto desenvolvido para a Global Solution FIAP — Generative AI For Engineering.
+Projeto desenvolvido para a Global Solution FIAP - Generative AI For Engineering.
 
 Equipe:
 
 ```txt
-Nome dos integrantes aqui
-RM dos integrantes aqui
+Lucas Laia Manentti - RM 97709
+Guilherme Faustino Vargas - RM 98278
+Ryan Perez Pacheco - RM 98782
 ```
 
----
+## Licenca
 
-## Licença
-
-Este projeto foi desenvolvido para fins acadêmicos.
+Este projeto foi desenvolvido para fins academicos.

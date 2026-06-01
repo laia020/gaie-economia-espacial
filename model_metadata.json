@@ -1,0 +1,17 @@
+{
+  "best_model": "Logistic Regression",
+  "selection_metric": "test_f1",
+  "raw_features": [
+    "temperature_c",
+    "battery_voltage",
+    "orientation_x",
+    "orientation_y",
+    "orientation_z",
+    "cosmic_radiation",
+    "solar_flux",
+    "data_rate_mbps",
+    "thruster_fuel_kg",
+    "age_years"
+  ],
+  "target": "component_failure"
+}
