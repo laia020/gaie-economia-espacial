@@ -127,7 +127,7 @@ def main():
             solar_flux = number_input_from_data("Fluxo solar (W/m2)", data, "solar_flux")
             data_rate = number_input_from_data("Taxa de dados (Mbps)", data, "data_rate_mbps")
             fuel = number_input_from_data("Combustivel do propulsor (kg)", data, "thruster_fuel_kg")
-            age = number_input_from_data("Idade (anos)", data, "age_years")
+            age = number_input_from_data("Tempo operacional (anos)", data, "age_years")
 
         submitted = st.form_submit_button("Prever")
 
@@ -210,3 +210,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

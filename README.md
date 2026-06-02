@@ -81,7 +81,7 @@ Caracteristicas do dataset:
 | `solar_flux` | Intensidade do fluxo solar. |
 | `data_rate_mbps` | Taxa de transmissao de dados em Mbps. |
 | `thruster_fuel_kg` | Quantidade de combustivel restante nos propulsores. |
-| `age_years` | Idade operacional do satelite em anos. |
+| `age_years` | Tempo operacional do satelite em anos decimais. |
 | `component_failure` | Variavel alvo: indica se houve falha no componente. |
 
 ## Tecnologias utilizadas
@@ -121,7 +121,7 @@ gaie-economia-espacial/
 
 ### 1. Geracao dos dados
 
-O script `generate_dataset.py` cria dados sinteticos com seed fixa. As variaveis simulam condicoes de operacao de satelites, como temperatura, radiacao, tensao da bateria, combustivel, fluxo solar, taxa de dados e idade.
+O script `generate_dataset.py` cria dados sinteticos com seed fixa. As variaveis simulam condicoes de operacao de satelites, como temperatura, radiacao, tensao da bateria, combustivel, fluxo solar, taxa de dados e tempo operacional.
 
 A variavel `component_failure` e calculada a partir de uma funcao logistica que combina fatores de risco.
 
@@ -134,7 +134,7 @@ O arquivo `feature_engineering.py` adiciona variaveis derivadas ao pipeline:
 | `thermal_stress` | Distancia da temperatura nominal de 25 C. |
 | `low_voltage_risk` | Risco por tensao abaixo de 12 V. |
 | `fuel_reserve_risk` | Risco por combustivel abaixo de 500 kg. |
-| `radiation_age_interaction` | Exposicao acumulada aproximada por radiacao vezes idade. |
+| `radiation_age_interaction` | Exposicao acumulada aproximada por radiacao vezes tempo operacional. |
 | `orientation_magnitude` | Magnitude do vetor de orientacao. |
 
 ### 3. Pre-processamento
@@ -212,7 +212,7 @@ Principais variaveis na ultima execucao:
 | `radiation_age_interaction` | 0.3136 |
 | `thermal_stress` | 0.2178 |
 
-A interpretacao indica que idade do satelite, radiacao cosmica, risco de baixa tensao e exposicao acumulada estao entre os fatores mais relevantes para a previsao de falha.
+A interpretacao indica que tempo operacional do satelite, radiacao cosmica, risco de baixa tensao e exposicao acumulada estao entre os fatores mais relevantes para a previsao de falha.
 
 ## Aplicacao web
 
@@ -368,8 +368,10 @@ Este projeto simula um cenario de manutencao preditiva para satelites. A solucao
 O dataset foi montado de forma sintetica para simular telemetria de um satelite em operacao.
 O script generate_dataset.py usa uma seed fixa, RANDOM_SEED = 42, para que qualquer pessoa consiga gerar novamente o mesmo conjunto de dados.
 
-As variaveis simulam leituras esperadas de uma missao espacial, como temperatura, tensao da bateria, orientacao, radiacao, fluxo solar, taxa de dados, combustivel e idade operacional.
+As variaveis simulam leituras esperadas de uma missao espacial, como temperatura, tensao da bateria, orientacao, radiacao, fluxo solar, taxa de dados, combustivel e tempo operacional.
 A variavel alvo component_failure nao foi sorteada de forma totalmente aleatoria.
 Primeiro, o script calcula fatores de risco como estresse termico, baixa tensao, baixo combustivel, magnitude da orientacao e exposicao a radiacao ao longo do tempo.
 Depois, esses fatores entram em uma funcao logistica que gera a probabilidade de falha; a classe final e sorteada com base nessa probabilidade.
+
+
 

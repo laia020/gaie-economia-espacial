@@ -17,7 +17,7 @@ As variaveis criadas por engenharia de atributos sao:
 - `thermal_stress`: distancia absoluta da temperatura nominal de 25 C.
 - `low_voltage_risk`: quanto a bateria esta abaixo de 12 V.
 - `fuel_reserve_risk`: quanto o combustivel esta abaixo de 500 kg.
-- `radiation_age_interaction`: proxy de exposicao acumulada usando radiacao vezes idade.
+- `radiation_age_interaction`: proxy de exposicao acumulada usando radiacao vezes tempo operacional.
 - `orientation_magnitude`: magnitude do vetor de orientacao.
 
 Os dados sao divididos com estratificacao em 80% treino e 20% teste. O conjunto de treino tambem e avaliado com validacao cruzada estratificada de 5 folds.
@@ -69,3 +69,4 @@ python generate_dataset.py
 python train_save_model.py
 python -m streamlit run app.py
 ```
+
