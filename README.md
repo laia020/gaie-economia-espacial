@@ -349,12 +349,9 @@ Equipe:
 Lucas Laia Manentti - RM 97709
 Guilherme Faustino Vargas - RM 98278
 Ryan Perez Pacheco - RM 98782
+Guilherme Dal Posolo Matheus - RM 98694
+João Lucas Yudi Redi Handa - RM 98458
 ```
-
-## Licenca
-
-Este projeto foi desenvolvido para fins academicos.
-
 ## Resumo executivo complementar
 
 Este projeto simula um cenario de manutencao preditiva para satelites. A solucao gera um dataset sintetico de telemetria espacial, treina e compara tres modelos de classificacao, escolhe o melhor modelo por F1-score, explica as previsoes com SHAP e publica uma interface interativa em Streamlit.
