@@ -347,6 +347,8 @@ Equipe:
 Lucas Laia Manentti - RM 97709
 Guilherme Faustino Vargas - RM 98278
 Ryan Perez Pacheco - RM 98782
+Guilherme Dal Posolo Matheus - RM 98694
+João Lucas Yudi Redi Handa - RM 98458
 ```
 
 ## Licenca
