@@ -18,6 +18,7 @@ MODEL_PATH = Path("best_model.pkl")
 METADATA_PATH = Path("model_metadata.json")
 METRICS_PATH = Path("model_metrics.csv")
 TARGET = "component_failure"
+ALERT_THRESHOLD = 0.40
 
 
 @st.cache_resource
@@ -77,6 +78,14 @@ def number_input_from_data(label, data, column, step=0.1):
     )
 
 
+def risk_label(probability):
+    if probability >= 0.60:
+        return "Alto risco de falha"
+    if probability >= ALERT_THRESHOLD:
+        return "Risco moderado de falha"
+    return "Baixo risco de falha"
+
+
 def main():
     st.set_page_config(page_title="Previsao de Falha em Satelites", layout="wide")
     st.title("Previsao de Falha em Componentes de Satelites")
@@ -92,7 +101,7 @@ def main():
     )
 
     if not metrics.empty:
-        with st.expander("Metricas de comparacao dos modelos", expanded=False):
+        with st.expander("Metricas de comparacao dos modelos", expanded=True):
             metric_columns = [
                 "model",
                 "test_accuracy",
@@ -148,12 +157,14 @@ def main():
 
     if submitted:
         prob = model.predict_proba(sample)[0, 1]
-        prediction = model.predict(sample)[0]
+        classification = risk_label(prob)
 
         st.subheader("Previsao")
-        metric_col1, metric_col2 = st.columns(2)
+        metric_col1, metric_col2, metric_col3 = st.columns(3)
         metric_col1.metric("Probabilidade de falha", f"{prob:.1%}")
-        metric_col2.metric("Classe prevista", "Falha" if prediction == 1 else "Sem falha")
+        metric_col2.metric("Classificacao de risco", classification)
+        metric_col3.metric("Limiar de alerta", f"{ALERT_THRESHOLD:.0%}")
+        st.caption("O limiar de alerta foi definido em 40% para priorizar a deteccao de cenarios com risco de falha.")
 
         st.subheader("Explicacao do modelo (SHAP)")
         background = data[RAW_FEATURES].sample(min(200, len(data)), random_state=42)

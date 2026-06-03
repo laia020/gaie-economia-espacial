@@ -180,6 +180,12 @@ Matriz de confusao do modelo selecionado (`[[TN, FP], [FN, TP]]`):
 {cm}
 ```
 
+## Criterio de alerta no app
+
+No Streamlit, a previsao e exibida como classificacao operacional de risco usando a probabilidade estimada pelo modelo. O alerta comeca em 40% para priorizar a deteccao de cenarios suspeitos: abaixo de 40% e baixo risco, de 40% a 59,9% e risco moderado, e a partir de 60% e alto risco.
+
+Esse limiar afeta apenas a leitura operacional no app. As metricas de validacao do modelo foram calculadas e registradas separadamente em `model_metrics.csv`.
+
 ## Interpretabilidade com SHAP
 
 O SHAP foi calculado para o modelo selecionado depois das mesmas etapas de engenharia de atributos e normalizacao usadas no treinamento. Os maiores valores medios absolutos indicam as variaveis que mais influenciaram as previsoes de forma global.
@@ -269,4 +275,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 

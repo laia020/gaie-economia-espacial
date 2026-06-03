@@ -46,6 +46,8 @@ O projeto trata um problema de **classificacao binaria**.
 
 O modelo recebe variaveis de telemetria e retorna a probabilidade de falha.
 
+No app publicado, a probabilidade tambem e convertida em uma classificacao operacional de risco. Para facilitar a deteccao de cenarios suspeitos, o alerta comeca em 40%: abaixo disso o app mostra baixo risco, entre 40% e 60% mostra risco moderado, e a partir de 60% mostra alto risco. As metricas oficiais do modelo continuam documentadas em `model_metrics.csv` e `model_report.md`.
+
 ## Fonte e geracao dos dados
 
 O dataset e sintetico e reproduzivel. Ele e gerado pelo script:
@@ -372,6 +374,7 @@ As variaveis simulam leituras esperadas de uma missao espacial, como temperatura
 A variavel alvo component_failure nao foi sorteada de forma totalmente aleatoria.
 Primeiro, o script calcula fatores de risco como estresse termico, baixa tensao, baixo combustivel, magnitude da orientacao e exposicao a radiacao ao longo do tempo.
 Depois, esses fatores entram em uma funcao logistica que gera a probabilidade de falha; a classe final e sorteada com base nessa probabilidade.
+
 
 
 
